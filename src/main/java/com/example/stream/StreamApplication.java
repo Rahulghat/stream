@@ -20,7 +20,9 @@ public class StreamApplication {
         employees.add(new Employee(2, "John1", "IT", 2222, 50));
         employees.add(new Employee(3, "Jane2", "IT", 1212, 17));
         employees.add(new Employee(5, "Ajith Kumar", "Finance", 1111, 43));
-        employees.add(new Employee(6, "Rameshwarm swami", "Techsupport", 1111, 34));
+        employees.add(new Employee(6, "Rameshwarm swami", "Techsupport", 12, 34));
+        employees.add(new Employee(7, "Rameshwarm anantha", "Techsupport", 50000, 34));
+
 
         //displayName
         System.out.println("get employee names :" + transform(employees));
@@ -62,6 +64,21 @@ public class StreamApplication {
 
         employeeList.stream().forEach(e -> System.out.println(e.toString()));
 
+        Employee e34 = returnEmployeeaged(employees, 34);
+        System.out.println("employee with age 34:" + e34.toString());
+
+        System.out.println("find employee whose salary is third smallest");
+        Employee ethirdSmlslry = thirsmallestSalary(employees);
+        System.out.println(ethirdSmlslry.toString());
+
+    }
+
+    private static Employee thirsmallestSalary(List<Employee> employees) {
+        return employees.stream().sorted(Comparator.comparing(Employee::getSalary)).skip(2).findFirst().get();
+    }
+
+    private static Employee returnEmployeeaged(List<Employee> employees, int i) {
+        return employees.stream().filter(e -> e.getAge() == i).findFirst().get();
     }
 
     private static List<Employee> convertToLowerandreturn(List<Employee> employees) {
